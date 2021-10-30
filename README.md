@@ -16,7 +16,7 @@
 ```
 - Для запуска сервера выполните (python если windows)
 ```
-    python3 manage.py runserver
+    $ python3 manage.py runserver
 ```
 ## Yandex Practicum
 ### Author
