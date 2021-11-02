@@ -5,7 +5,7 @@ User = get_user_model()
 
 
 class Post(models.Model):
-    # Строковый тип \ текст
+    # Текст. Для создания поля self не требуется.
     text = models.TextField()
     # Тип поля: DateTimeField, для хранения даты и времени;
     # параметр auto_now_add определяет, что в поле будет автоматически
@@ -16,4 +16,4 @@ class Post(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name='posts'
-    ) 
+    )
