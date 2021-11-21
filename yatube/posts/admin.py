@@ -1,10 +1,11 @@
+from django.conf import settings
 from django.contrib import admin
-# Из модуля models импортируем модель Post
-from .models import Post, Group
+
+from .models import Group, Post
 
 
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    # Перечисляем поля, которые должны отображаться в админке
     list_display = (
         'pk',
         'text',
@@ -13,15 +14,14 @@ class PostAdmin(admin.ModelAdmin):
         'group',
     )
     list_editable = ('group',)
-    # Добавляем интерфейс для поиска по тексту постов
     search_fields = ('text',)
-    # Добавляем возможность фильтрации по дате
     list_filter = ('pub_date',)
-    # Это свойство сработает для всех колонок: где пусто - там будет эта строка
-    empty_value_display = '-пусто-'
+    empty_value_display = settings.EMPTY_STR
 
 
+@admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
+    view_on_site = True
     list_display = (
         'pk',
         'title',
@@ -29,10 +29,5 @@ class GroupAdmin(admin.ModelAdmin):
         'description',
     )
     search_fields = ('title',)
-    empty_value_display = '-пусто-'
-
-
-# При регистрации модели Post источником конфигурации для неё назначаем
-# класс PostAdmin
-admin.site.register(Post, PostAdmin)
-admin.site.register(Group, GroupAdmin)
+    prepopulated_fields = {'slug': ('title',)}
+    empty_value_display = settings.EMPTY_STR

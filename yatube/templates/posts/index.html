@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-  <!-- класс py-5 создает отступы сверху и снизу блока -->
   <div class="container py-5">     
     <h1>Последние обновления на сайте</h1>
     {% for post in posts %}
@@ -13,12 +12,10 @@
         </li>
       </ul>
       <p>{{ post.text }}</p>
-      <!-- Проверяю есть ли группа у поста, и если есть отображаю url -->
       {% if post.group %}
         <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
       {% endif %}
       {% if not forloop.last %}<hr>{% endif %}
     {% endfor %}
-    <!-- под последним постом нет линии -->
   </div> 
 {% endblock %}
